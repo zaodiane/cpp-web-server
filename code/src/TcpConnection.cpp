@@ -46,6 +46,8 @@ void TcpConnection::handleRead(){
         if(valread < 0){
             if(errno == EAGAIN || errno == EWOULDBLOCK){
                 break;
+            }else if(errno == EINTR){
+                continue;
             }else{
                 perror("recv error");
                 handleClose();
@@ -80,7 +82,6 @@ void TcpConnection::handleRead(){
             }
             ::send(fd_,response.c_str(),response.size(),0);
             handleClose();
-            std::cout << "after handleClose" << std::endl;
             return;
         }
     }
