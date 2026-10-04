@@ -1,2 +1,6 @@
 *.o
+*.log
+src/
 bin/
+.vscode/
+
