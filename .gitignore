@@ -1,6 +1,6 @@
 *.o
 *.log
-src/
+/src/
 bin/
 .vscode/
 test_db/
