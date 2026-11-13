@@ -23,6 +23,9 @@ class TcpServer{
         std::vector<std::thread> subThreads_;
         int nextSub_;
 
+        std::thread timer_thread_;
+        std::atomic<bool> quit_{false};
+
         void onNewConnection(int fd);
         void onCloseConnection(TcpConnection* conn);
 };

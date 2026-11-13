@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+</head>
+<body>
+    <h2>用户登录</h2>
+    <!-- 注意这里去掉了 form 标签，或者保留也可以，但 button 必须加 type="button" -->
+    <div>
+        账号: <input type="text" id="username"><br><br>
+        密码: <input type="password" id="password"><br><br>
+        <!-- 【关键修复】加上 type="button" 防止表单自动提交刷新页面 -->
+        <button type="button" onclick="doLogin()">登录</button>
+    </div>
+    <br>
+    <a href="/register.html">没有账号？去注册</a>
+
+    <script>
+        function doLogin() {
+            let user = document.getElementById("username").value;
+            let pass = document.getElementById("password").value;
+            
+            if(!user || !pass) {
+                alert("账号或密码不能为空！");
+                return;
+            }
+
+            let data = "username=" + encodeURIComponent(user) + "&password=" + encodeURIComponent(pass);
+            
+            fetch('/login', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: data
+            })
+            .then(res => res.text())
+            .then(text => {
+                alert(text);
+            })
+            .catch(err => {
+                alert("请求失败: " + err);
+            });
+        }
+    </script>
+</body>
+</html>

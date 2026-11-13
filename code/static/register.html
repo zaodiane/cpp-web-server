@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>注册</title>
+    </head>
+    <body>
+    <h2>用户注册</h2>
+    <form id="registerForm">
+        账号: <input type="text" id="username"><br><br>
+        密码: <input type="password" id="password"><br><br>
+        <button type="button" onclick="doRegister()">注册</button>
+    </form>
+    <a href="/login.html">已有账号？去登录</a>
+
+    <script>
+        function doRegister() {
+            let user = document.getElementById("username").value;
+            let pass = document.getElementById("password").value;
+            let data = "username=" + encodeURIComponent(user) + "&password=" + encodeURIComponent(pass);
+            
+            fetch('/register', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: data
+            }).then(res => res.text()).then(text => alert(text));
+        }
+    </script>
+</body>
+</html>
